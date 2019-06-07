@@ -21,7 +21,7 @@ hyperpar_file <- c(
   "hyperpar_sweep_lgb_sequential19-06-03-10-40.csv"
 )[13]
 
-data <- fread(file.path(getwd(), "../../Data", hyperpar_file))
+data <- fread(file.path(getwd(), "..", hyperpar_file))
 target <- "MAE_normalized"
 analysis_cols_first <- setdiff(colnames(data), c(target, "split"))
 data[,(analysis_cols_first):= lapply(.SD, as.factor),
