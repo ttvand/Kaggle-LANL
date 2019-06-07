@@ -14,7 +14,7 @@ splits = [0]
 model_description = 'initial_gap'
 custom_model = models.initial_gap
 
-# In order of apparent effect on OOF performance
+# Sweeped parameter settings
 param_settings = [
     {
         'block_steps': 4000,

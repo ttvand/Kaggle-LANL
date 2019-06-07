@@ -22,12 +22,13 @@ model_params = {
     'target_quantile': [True],
     }
 
+# Sweeped parameters
 fixed_params = {
     'block_steps': 1500,
     'chunk_blocks': 100,
     'input_dimension_freq': 40,
     'input_dimension_cpc': 16,
-    'include_cpc_features': False, # This kills test performance! Leakage through these CPC features!
+    'include_cpc_features': False, # This set to True kills test performance! Leakage through these CPC features!
     'include_freq_features': True,
     'epochs': 10,
     'steps_per_epoch': 1000,

@@ -14,7 +14,7 @@ model_description = 'initial_gru'
 custom_model = models.initial_gru
 remove_overlap_chunks = True
 
-# In order of apparent effect on OOF performance
+# Sweeped parameters
 param_grid = {
     'epochs': [20, 30, 50],
     'validation_split': [0.05, 0.1, 0.2],

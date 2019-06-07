@@ -23,12 +23,8 @@ from keras.layers import TimeDistributed
 from keras.models import load_model
 
 
-# Feature encoder for the baseline recurrent sub-chunk model
+# Feature MLP encoder
 def input_encoder(x, hyperpars):
-#  x = Dense(64, activation='relu')(x)
-#  x = BatchNormalization()(x)
-#  x = Dense(64, activation='relu')(x)
-#  x = BatchNormalization()(x)
   if hyperpars['encoding_input_dropout'] > 0:
     x = Dropout(hyperpars['encoding_input_dropout'], name='input_dropout')(x)
   
@@ -102,7 +98,7 @@ def network_autoregressive_seq_gru(x, hyperpars):
   return x
 
 
-# Sequential recurrent sub-chunk model
+# Sequential recurrent sub-chunk model - part of Final submission
 def sequential_gru(hyperpars):
   # Set learning phase (https://stackoverflow.com/questions/42969779/keras-error-you-must-feed-a-value-for-placeholder-tensor-bidirectional-1-keras)
   K.set_learning_phase(1)
@@ -114,7 +110,7 @@ def sequential_gru(hyperpars):
     num_features += hyperpars['input_dimension_cpc']
   sub_steps = hyperpars['chunk_blocks']
   
-  # Define encoder model - encoding is fit to the autoregressive encoder
+  # Define FF encoder model
   encoder_input = Input((num_features,))
   encoder_output = input_encoder(encoder_input, hyperpars)
   encoder_model = keras.models.Model(encoder_input, encoder_output,
@@ -289,7 +285,8 @@ class GradientReversal(Layer):
     return dict(list(base_config.items()) + list(config.items()))
       
       
-# CPC encoder: stacked bidirectional RNN followed by an attention layer
+# CPC encoder: stacked bidirectional RNN followed by MLP and aggregation.
+# The aggregation is either an attention layer or an averaging layer.
 def cpc_encoder(x, hyperpars):
   # Optionally, drop the gap predictions from the inputs
   if hyperpars['drop_gap_prediction_from_inputs']:
@@ -348,7 +345,7 @@ def domain_prediction(x, hyperpars):
 
 
 # Domain prediction MLP - trained with reversed gradients to make the learned
-# embedding agnostic to the domain
+# embedding agnostic to the domain. TODO: don't duplicate def domain_prediction
 def additional_domain_prediction(x, hyperpars):
 #  x = GradientReversal(hp_lambda=hyperpars['grad_rev_lambda'])(x)
 #  x = Lambda(lambda x: K.stop_gradient(x))(x)
@@ -540,7 +537,8 @@ def initial_cpc(hyperpars):
 ###############################################################################
   
 
-# CPC main encoder: stacked bidirectional RNN followed by an attention layer
+# CPC main encoder: MLP - stacked bidirectional RNN and aggregation
+# The aggregation is either an attention layer or an averaging layer.
 def cpc_main_encoder(x, hyperpars):
   # Input dropout
   x = Dropout(hyperpars['input_dropout'])(x)

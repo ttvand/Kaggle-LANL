@@ -77,5 +77,5 @@ submission = pd.read_csv(data_folder + 'sample_submission.csv')
 submission.time_to_failure = preds_test
 the_date = datetime.datetime.now().strftime('%y-%m-%d-%H-%M')
 submission_path = submission_folder + the_date + '.csv'
-import pdb; pdb.set_trace()
+import pdb; pdb.set_trace() # Inspect predictions before storing the blend
 submission.to_csv(submission_path, index=False)

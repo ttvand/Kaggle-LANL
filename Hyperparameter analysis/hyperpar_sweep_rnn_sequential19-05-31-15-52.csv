@@ -1,0 +1,10 @@
+MAE,MAE_normalized,chunk_blocks,encoding_dropout,encoding_input_dropout,encoding_layers,gru_dropout,include_cpc_features,initial_lr,prediction_layers,recurrent_cells,reduce_lr_patience,relu_last_encoding_layer,train_last_part_loss_frac,train_all_previous,target_quantile
+2.0837788104812502,2.0837788104812502,100,0.25,0.25,[32],0.5,False,0.0003,[8],"[16, 16, 16]",5,True,0.1,True,True
+2.1574740460925295,2.1574740460925295,50,0.25,0.5,[],0.25,False,0.001,"[32, 16]",[8],3,True,0.2,True,True
+2.081047002572086,2.081047002572086,80,0.0,0.25,"[32, 32]",0.25,False,0.0001,[8],[8],5,False,0.2,True,True
+2.1456610954670223,2.1456610954670223,80,0.5,0.25,[],0.5,False,0.001,[8],"[64, 32]",5,True,0.4,True,True
+2.1527852198604243,2.1527852198604243,50,0.25,0.5,[],0.0,False,0.0001,"[8, 8]","[8, 8]",5,True,0.4,True,True
+2.1198550074461826,2.1198550074461826,80,0.0,0.25,[32],0.25,True,0.003,"[64, 32]",[8],5,True,0.1,True,True
+2.110242553017575,2.110242553017575,80,0.25,0.5,[32],0.0,False,0.003,"[64, 32]","[8, 8]",1,True,0.4,True,True
+2.1430096191343373,2.1430096191343373,80,0.5,0.25,[],0.25,True,0.003,[8],"[32, 16]",5,True,0.2,True,True
+2.1592081346891954,2.1592081346891954,50,0.0,0.5,[32],0.25,False,0.0001,"[64, 32]","[8, 8]",3,False,0.4,True,True

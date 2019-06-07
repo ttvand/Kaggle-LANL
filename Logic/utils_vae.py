@@ -1,4 +1,4 @@
-# Basic VAE MNIST - utilities
+# Basic VAE LANL - utilities
 # Adapted from https://keras.io/examples/variational_autoencoder_deconv/
 import keras
 from keras import backend as K
@@ -73,7 +73,7 @@ def Conv1DTranspose(input_tensor, filters, kernel_size, strides=1,
   return x
 
 
-# MNIST autoencoder model
+# LANL autoencoder model
 def lanl_vae(hyperpars):
   num_subchunks = hyperpars['num_subchunks']
   num_features = hyperpars['num_features']
@@ -136,7 +136,7 @@ def add_custom_metrics(model, custom_metrics):
 
 # Generate plots of the latent space, reconstructions and random samples.
 def plot_results(models, data, hyperpars, batch_size=128,
-                 model_folder='vae_mnist_figures'):
+                 model_folder='vae_lanl_figures'):
   """Plots labels and LANL chunks as a function of 2-dim latent vector."""
   encoder, decoder = models
   train_features, test_features, train_eq_ids, train_ttf = data
@@ -212,36 +212,6 @@ def plot_results(models, data, hyperpars, batch_size=128,
     plt.ylim(-5, 5)
     plt.savefig(filename)
     plt.show()
-
-#  # 4) Display a 10x3 2D manifold over chunks
-#  filename_base = os.path.join(model_folder, "chunks_over_latent")
-#  nx = 10
-#  ny = 3
-#  # linearly spaced coordinates corresponding to the 2D plot
-#  # of chunk classes in the latent space
-#  grid_x = np.linspace(-4, 4, nx)
-#  grid_y = np.linspace(-4, 4, ny)[::-1]
-#
-#  # Loop over the latent dimensions: freeze all but 2 and sweep over these 2.
-#  num_latent_figures = latent_dim // 2
-#  for fig_id in range(num_latent_figures):
-#    figure = np.zeros((num_subchunks * ny, num_features * nx))
-#    z_sample = np.random.normal(size=(1, latent_dim))
-#    for i, yi in enumerate(grid_y):
-#      for j, xi in enumerate(grid_x):
-#        z_sample[0, int(fig_id*2)] = xi
-#        z_sample[0, int(fig_id*2 + 1)] = yi
-#        x_decoded = decoder.predict([z_sample])
-#        chunk = x_decoded[0]
-#        figure[i * num_subchunks: (i + 1) * num_subchunks,
-#               j * num_features: (j + 1) * num_features] = chunk
-#  
-#    plt.figure(figsize=(10, 10))
-#    plt.xlabel("z[0]")
-#    plt.ylabel("z[1]")
-#    plt.imshow(figure, cmap='Greys_r')
-#    plt.savefig(filename_base + str(fig_id) + '.png')
-#    plt.show()
     
   # 5) Display original chunks and reconstructions
   filename = os.path.join(model_folder, "vae_reconstructions.png")
