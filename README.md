@@ -4,7 +4,7 @@ This repository contains all logic that resulted in an 11th place finish in the 
 
 Please consider the [Kaggle forum post](https://www.kaggle.com/c/LANL-Earthquake-Prediction/discussion/94363#latest-547303) as a starting point for my solution.
 
-There is a lot of logic so let me try to summarize it briefly:
+Brief summary of the logic:
 
 - **EDA** folder contains some preliminary analysis
 - **Hyperparameter analysis** anlayzes hyperparameter settings for sweeps of LightGBM and Neural network experiments.
